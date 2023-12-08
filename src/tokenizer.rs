@@ -3,7 +3,7 @@ use std::str::Chars;
 
 /// Represents different types of tokens in the C language.
 #[derive(Debug, PartialEq)]
-enum Token {
+pub enum Token {
     Keyword(String),
     Identifier(String),
     Number(String),
@@ -12,13 +12,13 @@ enum Token {
 }
 
 /// A tokenizer for the C programming language.
-struct Tokenizer<'a> {
+pub struct Tokenizer<'a> {
     input: Peekable<Chars<'a>>,
 }
 
 impl<'a> Tokenizer<'a> {
     /// Creates a new tokenizer for the given input string.
-    fn new(input: &'a str) -> Self {
+    pub fn new(input: &'a str) -> Self {
         Tokenizer {
             input: input.chars().peekable(),
         }
@@ -36,7 +36,7 @@ impl<'a> Tokenizer<'a> {
     }
 
     /// Returns the next token from the input, if available.
-    fn next_token(&mut self) -> Option<Token> {
+    pub fn next_token(&mut self) -> Option<Token> {
         self.consume_whitespace(); // First consume any leading whitespace
 
         let current_char = self.input.peek()?;
@@ -110,8 +110,4 @@ mod tests {
             ]
         );
     }
-}
-
-fn main() {
-    println!("Hello, world.");
 }
